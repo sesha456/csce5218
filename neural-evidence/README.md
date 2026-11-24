@@ -22,9 +22,10 @@ ne/            library code
   bilstm.py      siamese BiLSTM with GloVe
   zeroshot.py    MNLI-only zero-shot verifier
   perturb.py     distractor evidence, back-translation, mutual-entailment filter
+  controls.py    distractor controls (random / same entity / topical) and matched paraphrase test
   results.py     shared results layout + mean/std summaries
 scripts/       download.sh, build_wiki.py, prepare_fever.py, prepare_scifact.py
-notebooks/     Colab notebooks 01-06 (all run end to end for the final results)
+notebooks/     Colab notebooks 01-07 (all run end to end for the final results)
 tests/         tiny synthetic data + tiny random models; every code path runs on CPU (python -m pytest tests)
 ```
 
@@ -60,6 +61,7 @@ The real experiments run in Google Colab. The simplest way is to upload the `neu
 | 04 | `04_bert_roberta_l4` | L4 | E2 BERT-base, RoBERTa-base (50K, 3 seeds) | 1–1.5 h |
 | 05 | `05_deberta_a100` | A100 | E2–E7 DeBERTa-v3-base, main full-data model (saved) | 4–5 h, resumable |
 | 06 | `06_results_summary` | CPU | `results_summary.md`, `results_all.csv`, E5 plot, error analysis | minutes |
+| 07 | `07_robustness_controls` | any GPU | distractor controls (3 conditions x 3 samples, MNLI-neutral) and matched paraphrase test, `controls/controls_summary.md` | 30–45 min on A100 |
 
 Every notebook mounts Drive, reads the code from `MyDrive/neural-evidence/code` (or clones `REPO_URL`), and writes results to `MyDrive/neural-evidence/results/<exp>/<run>_seed<seed>/`. Finished runs are skipped, so after a disconnect you can just run all again. The effective batch size is 32 on every GPU (only the per-device batch and gradient accumulation change), so runs on different GPUs stay comparable. Precision is chosen automatically: bf16 on A100/L4, fp16 on T4.
 
