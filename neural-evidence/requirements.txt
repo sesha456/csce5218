@@ -1,0 +1,24 @@
+# Core
+numpy
+scipy
+pandas
+scikit-learn
+tqdm
+tabulate
+matplotlib
+
+# Retrieval
+bm25s>=0.2
+PyStemmer>=2.2
+
+# Models and training
+torch
+transformers>=4.38
+accelerate>=0.26
+datasets
+tokenizers
+sentencepiece
+protobuf
+
+# Tests
+pytest
